@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TYLER, THE CREATOR</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif; 
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        @font-face {
+            font-family: "Jai";
+            src: url("assets/JAi_____.TTF") format("truetype");
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: "Milker";
+            src: url("assets/Milker.otf") format("opentype");
+            font-display: swap;
+        }
+        
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow-y: auto; 
+        }
+        
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/3ax4l35rbp861.webp');
+            background-size: cover;
+            background-position: center center;
+            z-index: 1;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .header {
+            color: #ffffff;
+            font-size: 12px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Jai', Arial, sans-serif;
+        }
+        
+        h1 {
+            font-family: 'Milker', Arial, sans-serif;
+            font-size: 5rem;
+            line-height: 0.9;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+        }
+        
+        .creator {
+            font-size: 9rem;
+            font-family: 'Milker', Arial, sans-serif;
+        }
+        
+        .subtitle {
+            color: #ffffff;
+            font-size: 16px;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Jai', Arial, sans-serif;
+            padding: 0 15px;
+        }
+        
+        input {
+            background-color: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 12px 15px;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 4px; 
+        }
+        
+        button {
+            background-color: #e9d762;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 12px 30px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 4px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+        
+        #resultImage {
+            display: none;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+                margin: 5px 0;
+            }
+            
+            .creator {
+                font-size: 5.5rem;
+            }
+            
+            .header {
+                font-size: 9px;
+            }
+            
+            .subtitle {
+                font-size: 11px;
+                padding: 0 10px;
+                margin-top: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .creator {
+                font-size: 4.5rem;
+            }
+            
+            .header {
+                font-size: 8px;
+            }
+            
+            .content {
+                padding: 15px 10px;
+            }
+            
+            input {
+                width: 90%;
+            }
+        }
+        
+        @media (max-height: 600px) {
+            .image-container {
+                margin-top: 20px;
+                max-height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="background"></div>
+        
+        <div class="content">
+            <div class="header">ALL SONGS WRITTEN AND PRODUCED BY TYLER OKONMA</div>
+            
+            <h1>TYLER, THE<br><span class="creator">CREATOR</span></h1>
+            
+            <div class="subtitle">ENTER A LETTER AND I'LL GUESS THE TYLER, THE CREATOR SONG THAT REPRESENTS YOU!</div>
+            
+            <input type="text" id="letter" maxlength="1" placeholder="ENTER A LETTER">
+            <br>
+            <button onclick="checkLetter()">SUBMIT</button>
+            
+            <div class="image-container">
+                <img id="resultImage" src="" alt="Tyler the Creator song">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var images = {
+            "a": "assets/lettera.png",
+            "b": "assets/letterb.png",
+            "c": "assets/letterc.png",
+            "d": "assets/letterd.png",
+            "e": "assets/lettere.png",
+            "f": "assets/letterf.png",
+            "g": "assets/letterg.png",
+            "h": "assets/letterh.png",
+            "i": "assets/letteri.png",
+            "j": "assets/letterj.png",
+            "k": "assets/letterk.png",
+            "l": "assets/letterl.png",
+            "m": "assets/letterm.png",
+            "n": "assets/lettern.png",
+            "o": "assets/lettero.png",
+            "p": "assets/letterp.png",
+            "q": "assets/letterq.png",
+            "r": "assets/letterr.png",
+            "s": "assets/letters.png",
+            "t": "assets/lettert.png",
+            "u": "assets/letteru.png",
+            "v": "assets/letterv.png",
+            "w": "assets/letterw.png",
+            "x": "assets/letterx.png",
+            "y": "assets/lettery.png",
+            "z": "assets/letterz.png"
+        };
+
+        function checkLetter() {
+            var letterInput = document.getElementById("letter").value.toLowerCase();
+            var resultImage = document.getElementById("resultImage");
+            
+            if (letterInput && letterInput.length === 1 && /[a-z]/i.test(letterInput)) {
+                if (images[letterInput]) {
+                    resultImage.src = images[letterInput];
+                    resultImage.style.display = "block";
+                    
+
+                    setTimeout(function() {
+                        resultImage.scrollIntoView({behavior: "smooth", block: "center"});
+                    }, 100);
+                } else {
+                    alert("No image found for this letter");
+                    resultImage.style.display = "none";
+                }
+            } else {
+                alert("Please enter a valid letter (A-Z)");
+                resultImage.style.display = "none";
+            }
+        }
+        
+
+        document.getElementById("letter").addEventListener("focus", function() {
+            
+            setTimeout(function() {
+                window.scrollTo(0, document.getElementById("letter").offsetTop - 100);
+            }, 300);
+        });
+    </script>
+</body>
+</html>
